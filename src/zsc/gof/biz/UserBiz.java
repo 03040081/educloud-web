@@ -18,7 +18,7 @@ public interface UserBiz {
 	
 	public void CompltetOrder(int orderId);
 	
-	public boolean addSchedule(Schedule schedule);
+	public int addSchedule(Schedule schedule);
 	
 	public List<Schedule> getUserSchedule(int userId);
 }

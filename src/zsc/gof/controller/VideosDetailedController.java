@@ -144,7 +144,7 @@ public class VideosDetailedController {
 		VideoHttpResponse<VideoInfo> videoHttpResponse=new VideoHttpResponse<VideoInfo>();
 		try {
 			videoInfo=biz.getVideoDetailed(videoId);
-			
+
 			videoHttpResponse.setRet(videoInfo);
 			videoHttpResponse.setCode(200);
 		} catch (Exception e) {
@@ -176,7 +176,7 @@ public class VideosDetailedController {
 		}catch(Exception e){
 			videoHttpResponse.setMsg(e.getMessage());
 		}
-		
+
 		return videoHttpResponse;
 	}
 
@@ -202,40 +202,58 @@ public class VideosDetailedController {
 		}catch(Exception e){
 			videoHttpResponse.setMsg(e.getMessage());
 		}
-		
+
 		return videoHttpResponse;
 	}
 	
 	@RequestMapping("/publishAssess")
-	public void publishAssess(
+	@ResponseBody
+	public VideoHttpResponse<Boolean> publishAssess(
 			@RequestParam("videoId")int videoId,
-			@RequestParam("score")float score,
 			@RequestParam("contents")String contents,
 			@RequestParam("userId")int userId){
-		VideoAssess videoAssess=new VideoAssess();
-		User user=new User();
-		user.setUserId(userId);
-		videoAssess.setVideoId(videoId);
-		videoAssess.setScore(score);
-		videoAssess.setContents(contents);
-		videoAssess.setUser(user);
-		biz.publishAssess(videoAssess);
+		VideoHttpResponse<Boolean> response=new VideoHttpResponse<Boolean>();
+		try{
+			VideoAssess videoAssess=new VideoAssess();
+			User user=new User();
+			user.setUserId(userId);
+			videoAssess.setVideoId(videoId);
+			videoAssess.setScore(10);
+			videoAssess.setContents(contents);
+			videoAssess.setUser(user);
+			biz.publishAssess(videoAssess);
+			response.setCode(200);
+			response.setRet(true);
+		}catch(Exception exception){
+			response.setMsg(exception.getMessage());
+		}
+		return response;
 	}
 	/*
 	 * ·¢±í×ÉÑ¯
 	 */
 	@RequestMapping("/publishForum")
-	public void publishForum(
+	@ResponseBody
+	public VideoHttpResponse<Boolean> publishForum(
 			@RequestParam("videoId")int videoId,
 			@RequestParam("contents")String contents,
 			@RequestParam("userId")int userId){
-		Forum forum=new Forum();
-		User user=new User();
-		user.setUserId(userId);
-		forum.setUser(user);
-		forum.setContents(contents);
-		forum.setVideoId(videoId);
-		biz.publishForum(forum);
+		VideoHttpResponse<Boolean> response=new VideoHttpResponse<Boolean>();
+		try{
+
+			Forum forum=new Forum();
+			User user=new User();
+			user.setUserId(userId);
+			forum.setUser(user);
+			forum.setContents(contents);
+			forum.setVideoId(videoId);
+			biz.publishForum(forum);
+			response.setCode(200);
+			response.setRet(true);
+		}catch(Exception exception){
+			response.setMsg(exception.getMessage());
+		}
+		return response;
 	}
 
 	public static int hashFunc(String key){  

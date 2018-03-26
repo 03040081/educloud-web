@@ -48,7 +48,7 @@ public class UserBizImpl implements UserBiz{
 	}
 
 	@Override
-	public boolean addSchedule(Schedule schedule) {
+	public int addSchedule(Schedule schedule) {
 		// TODO Auto-generated method stub
 		return dao.addSchedule(schedule);
 	}

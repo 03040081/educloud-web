@@ -38,7 +38,7 @@ public interface UserDao {
 	
 	public VideoInfo OrderVideo(int videoId);
 	
-	public boolean addSchedule(Schedule schedule);
+	public int addSchedule(Schedule schedule);
 	
 	public List<Schedule> getUserSchedule(int userId);
 }

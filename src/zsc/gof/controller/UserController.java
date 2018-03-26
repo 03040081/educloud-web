@@ -178,23 +178,23 @@ public class UserController {
 			@RequestParam("userId")int userId,
 			//@RequestParam("token")String token,
 			@RequestParam("videoId")int videoId){
-		VideoHttpResponse<Boolean> videoHttpResponse=null;
+		VideoHttpResponse<Boolean> videoHttpResponse=new VideoHttpResponse<Boolean>();
 		VideoInfo videoInfo=null;
 		Schedule schedule=null;
 		try{
 			//String tokenCookie=CookieTools.getCookieValue("token", request);
-			videoHttpResponse=new VideoHttpResponse<Boolean>();
 			if(true){
 				videoInfo=new VideoInfo();
 				videoInfo.setVideoId(videoId);
 				schedule=new Schedule();
 				schedule.setUserId(userId);
 				schedule.setVideoInfo(videoInfo);
-				boolean flag=biz.addSchedule(schedule);
+				boolean flag=biz.addSchedule(schedule)>0?true:false;
 				videoHttpResponse.setCode(200);
 				videoHttpResponse.setRet(flag);
 			}else{
 				videoHttpResponse.setMsg("ÇëÏÈµÇÂ¼");
+				videoHttpResponse.setRet(false);
 			}
 		}catch(Exception exception){
 			videoHttpResponse.setMsg(exception.getMessage());
